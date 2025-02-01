@@ -10,7 +10,7 @@ class: text-center
 drawings:
   persist: false
 # slide transition: https://sli.dev/guide/animations.html#slide-transitions
-transition: slide-left
+transition: fade
 # enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
 ---
@@ -32,161 +32,143 @@ XState 是一個用於狀態管理的 JS 函式庫
 
 ---
 
-# Finite State Machine
+# Finite State Machine（還要改）
 
-有限狀態機是一種數學模型用來描述系統的行為，這個系統在任何時間點上都只會存在於一個狀態。舉例來說，紅綠燈就有 紅燈、綠燈、黃燈 三種狀態，在任何時間點上一定是這三種狀態的其中一種，不可能在一個時間點上存在兩種或兩種以上的狀態。
+有限狀態機是一種數學模型用來描述系統的行為
+
+- State
+- Action
+
+去定義清楚下面四類的 Action：
+
+- 進入動作：在進入狀態時進行
+- 退出動作：在退出狀態時進行
+- 輸入動作：依賴於目前狀態和輸入條件進行
+- 轉移動作：在進行特定轉移時進行
 
 <img 
-  class="absolute top-50 left-20 w-80"
+  class="absolute top-60 left-140 w-90"
   src='./images/light.png'
-/>            
+/>
 
 ---
 
-# Quick start
-
-Use code snippets and get the highlighting directly, and even types hover!
-
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-
-[Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
-
-# Compare to Jotai
-
-使用 set to direct chat 當作 Example code
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
+# Demo
 
 ````md magic-move {lines: true}
-```ts {*|2}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
+```ts
+const toggleMachine = createMachine({
+  id: 'toggle',
+  initial: 'Inactive',
+  states: {
+    Inactive: {
+      on: { toggle: 'Active' },
+    },
+    Active: {
+      on: { toggle: 'Inactive' },
+    },
+  },
+});
 ```
 
 ```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
+// Create an actor that you can send events to.
+// Note: the actor is not started yet!
+const actor = createActor(toggleMachine);
+
+// Subscribe to snapshots (emitted state changes) from the actor
+actor.subscribe((snapshot) => {
+  console.log('Value:', snapshot.value);
+});
+
+// Start the actor
+actor.start(); // logs 'Inactive'
+
+// Send events
+actor.send({ type: 'toggle' }); // logs 'Active'
+actor.send({ type: 'toggle' }); // logs 'Inactive'
+```
+
+```ts
+import { useMachine } from '@xstate/react';
+import { toggleMachine } from './toggleMachine';
+
+const App = () => {
+  const [state, send] = useMachine(toggleMachine);
+
+  return (
+    <div>
+      <div>Value: {state.value}</div>
+      <button onClick={() => send({ type: 'toggle' })}>Toggle</button>
+    </div>
+  );
+};
+```
+
+```ts {*|3|12-14}
+const toggleMachine = createMachine({
+  id: 'toggle',
+  context: { count: 0 },
+  initial: 'Inactive',
+  states: {
+    Inactive: {
+      on: { 
+        toggle: 'Active' 
+      },
+    },
+    Active: {
+      entry: assign({
+        count: ({ context }) => context.count + 1,
+      }),
+      on: { toggle: 'Inactive' },
+    },
+  },
+});
+```
+
+```ts {*|3-6|12}
+const toggleMachine = createMachine({
+  id: 'toggle',
+  context: ({ input }) => ({
+    count: 0,
+    maxCount: input.maxCount,
+  }),
+  initial: 'Inactive',
+  states: {
+    Inactive: {
+      on: {
+        toggle: {
+          guard: ({ context }) => context.count < context.maxCount,
+          target: 'Active',
+        },
+      },
+    },
+    Active: {
+      entry: assign({
+        count: ({ context }) => context.count + 1,
+      }),
+      on: { toggle: 'Inactive' },
+    },
+  },
+});
 ```
 ````
 
 ---
 
+# State Chart
+
+[連結](https://stately.ai/registry/editor/embed/05bdef56-870a-4edf-9800-5c2351ce7232?machineId=295d6e4b-384c-43a7-9b5a-55edc15d5b91&mode=Simulate)
+
+---
+
 # Extensions
 
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn more](https://sli.dev/guide/animations#click-animation)
-
-</div>
+[連結](https://marketplace.visualstudio.com/items?itemName=statelyai.stately-vscode)
 
 ---
 
 # Todos
 
 1. 未來可在重要的 xxx ，嘗試
+2. 與 Jotai 的[結合](https://jotai.org/docs/extensions/xstate)
