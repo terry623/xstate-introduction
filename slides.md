@@ -2,8 +2,7 @@
 # You can also start simply with 'default'
 theme: default
 # some information about your slides (markdown enabled)
-title: Welcome to Slidev
-info: hello
+title: XState Introduction - Terry Lin
 # apply unocss classes to the current slide
 class: text-center
 # https://sli.dev/features/drawing
@@ -15,8 +14,8 @@ transition: fade
 mdc: true
 ---
 
-# XState Introduction
-Presentation slides for developers
+# 像 MAGIC 一樣厲害的 XState！
+### Terry Lin @MediaTek
 
 ---
 
@@ -28,16 +27,16 @@ XState 是一個用於狀態管理的 JS 函式庫
 
 來描述與管理應用中的各種狀態與轉換，使邏輯更加明確且易於維護
 
-- 可視化工具 ⭐
+- 可視化工具
 - 框架無關性
 - 強大的擴充性
 
 能讓開發者更輕鬆地追蹤狀態轉變的過程
 
-還可降低程式因條件混亂或多層 if-else 判斷而導致的錯誤
+還可降低程式因條件混亂或多層 if-else 判斷導致的錯誤
 
 <img 
-  class="absolute w-80 left-145 top-65"
+  class="absolute w-80 left-145 top-70"
   src='./images/xstate-logo.jpg'
 />
 
@@ -78,6 +77,9 @@ const toggleMachine = createMachine({
 ```
 
 ```ts
+// An actor is a running process that can receive messages (events),
+// send messages and change its behavior based on the messages it receives.
+
 // Create an actor that you can send events to.
 // Note: the actor is not started yet!
 const actor = createActor(toggleMachine);
@@ -164,7 +166,7 @@ const toggleMachine = createMachine({
 
 # State Chart Demo
 
-以達哥 Codebase 中，會出現的各種主要狀態做範例
+以 Codebase 中會出現的主要狀態做範例
 
 - home
 - directChat
@@ -172,7 +174,9 @@ const toggleMachine = createMachine({
 - tmaChat
   - enter assistantChat first
 
-要 Simulate 請到 [Stately Editor](https://stately.ai/registry/editor/embed/e6c9c269-a65c-475b-8afd-09010866d350?mode=Design&machineId=a6ae1d42-68f3-4e84-b4c3-382f249904bb) 看
+要 Simulate 請到 [Stately Editor](https://stately.ai/registry/editor/embed/e6c9c269-a65c-475b-8afd-09010866d350?mode=Design&machineId=a6ae1d42-68f3-4e84-b4c3-382f249904bb) 
+
+或者用 [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=statelyai.stately-vscode)
 
 <img 
   class="absolute w-125 left-100 top-32"
@@ -181,11 +185,14 @@ const toggleMachine = createMachine({
 
 ---
 
-# Extensions
-
----
-
 # Todos
 
-1. 未來可在重要的 xxx ，嘗試
-2. 與 Jotai 的[結合](https://jotai.org/docs/extensions/xstate)
+1. 深入探索 XState 更多功能，參考[官方文件](https://stately.ai/docs)
+2. 若要與 Jotai 的整合，可用 [jotai-xstate](https://jotai.org/docs/extensions/xstate)
+3. 可以在適合的場景中進行小規模嘗試
+   - [XState](https://stately.ai/docs/xstate)：
+     - 適用於狀態邏輯較複雜、流程繁多且需要嚴謹控制的情況
+     - 因其能夠明確定義各狀態、事件與轉換，並可視覺化追蹤整個狀態流程
+   - [Jotai](https://jotai.org/)：
+     - 適用於狀態邏輯較簡單或需要細粒度、局部管理的場景
+     - 其極簡的 API 設計只會更新實際依賴該 atom 的元件，從而提升效能
