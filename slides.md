@@ -14,8 +14,8 @@ transition: fade
 mdc: true
 ---
 
-# 像 MAGIC 一樣厲害的 XState！
-### Terry Lin @MediaTek
+# 像 MAGIC 一樣厲害的 XState
+Terry Lin @MediaTek
 
 ---
 
@@ -33,7 +33,7 @@ XState 是一個用於狀態管理的 JS 函式庫
 
 能讓開發者更輕鬆地追蹤狀態轉變的過程
 
-還可降低程式因條件混亂或多層 if-else 判斷導致的錯誤
+還可降低程式<span v-mark.orange="1">因條件混亂或多層 if-else 判斷</span>導致的錯誤
 
 <img 
   class="absolute w-80 left-145 top-70"
@@ -46,7 +46,7 @@ XState 是一個用於狀態管理的 JS 函式庫
 
 有限狀態機（FSM），是一種用來描述系統行為的數學模型
 
-- 有限狀態：系統的所有可能狀態是有限且固定的，每次系統僅能處於其中一個狀態
+- 有限狀態：系統的所有可能狀態是有限且固定的，每次系統<span v-mark.orange="1">僅能處於其中一個狀態</span>
 - 狀態轉換：根據外部輸入或事件，系統會從當前狀態轉換到另一個狀態
 - 輸入條件：轉換的觸發條件通常由外部輸入決定，不同的輸入對應不同的轉換路徑
 - 動作或輸出：在狀態轉換過程中，系統可能會執行特定動作或產生相應輸出
@@ -166,13 +166,12 @@ const toggleMachine = createMachine({
 
 # State Chart Demo
 
-以 Codebase 中會出現的主要狀態做範例
+以 Codebase 中出現的主要狀態做範例：
 
-- home
-- directChat
-- assistantChat
-- tmaChat
-  - enter assistantChat first
+1. home
+2. directChat
+3. assistantChat
+4. tmaChat
 
 要 Simulate 請到 [Stately Editor](https://stately.ai/registry/editor/embed/e6c9c269-a65c-475b-8afd-09010866d350?mode=Design&machineId=a6ae1d42-68f3-4e84-b4c3-382f249904bb) 
 
@@ -191,8 +190,8 @@ const toggleMachine = createMachine({
 2. 若要與 Jotai 的整合，可用 [jotai-xstate](https://jotai.org/docs/extensions/xstate)
 3. 可以在適合的場景中進行小規模嘗試
    - [XState](https://stately.ai/docs/xstate)：
-     - 適用於狀態邏輯較複雜、流程繁多且需要嚴謹控制的情況
+     - 適用於狀態邏輯<span v-mark.orange="1">較複雜、流程繁多且需要嚴謹控制</span>的情況
      - 因其能夠明確定義各狀態、事件與轉換，並可視覺化追蹤整個狀態流程
    - [Jotai](https://jotai.org/)：
-     - 適用於狀態邏輯較簡單或需要細粒度、局部管理的場景
+     - 適用於狀態邏輯<span v-mark.orange="1">較簡單或需要細粒度、局部管理</span>的場景
      - 其極簡的 API 設計只會更新實際依賴該 atom 的元件，從而提升效能
