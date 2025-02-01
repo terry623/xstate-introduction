@@ -26,34 +26,40 @@ XState 是一個用於狀態管理的 JS 函式庫
 
 利用有限狀態機（FSM）和狀態圖（Statecharts）
 
-來描述與管理應用中的各種狀態與轉換
+來描述與管理應用中的各種狀態與轉換，使邏輯更加明確且易於維護
 
-使邏輯更加明確且易於維護
+- 可視化工具 ⭐
+- 框架無關性
+- 強大的擴充性
+
+能讓開發者更輕鬆地追蹤狀態轉變的過程
+
+還可降低程式因條件混亂或多層 if-else 判斷而導致的錯誤
+
+<img 
+  class="absolute w-80 left-145 top-65"
+  src='./images/xstate-logo.jpg'
+/>
 
 ---
 
-# Finite State Machine（還要改）
+# Finite State Machine
 
-有限狀態機是一種數學模型用來描述系統的行為
+有限狀態機（FSM），是一種用來描述系統行為的數學模型
 
-- State
-- Action
-
-去定義清楚下面四類的 Action：
-
-- 進入動作：在進入狀態時進行
-- 退出動作：在退出狀態時進行
-- 輸入動作：依賴於目前狀態和輸入條件進行
-- 轉移動作：在進行特定轉移時進行
+- 有限狀態：系統的所有可能狀態是有限且固定的，每次系統僅能處於其中一個狀態
+- 狀態轉換：根據外部輸入或事件，系統會從當前狀態轉換到另一個狀態
+- 輸入條件：轉換的觸發條件通常由外部輸入決定，不同的輸入對應不同的轉換路徑
+- 動作或輸出：在狀態轉換過程中，系統可能會執行特定動作或產生相應輸出
 
 <img 
-  class="absolute top-60 left-140 w-90"
+  class="m-auto w-42%"
   src='./images/light.png'
 />
 
 ---
 
-# Demo
+# Quick Start
 
 ````md magic-move {lines: true}
 ```ts
@@ -89,7 +95,7 @@ actor.send({ type: 'toggle' }); // logs 'Active'
 actor.send({ type: 'toggle' }); // logs 'Inactive'
 ```
 
-```ts
+```tsx
 import { useMachine } from '@xstate/react';
 import { toggleMachine } from './toggleMachine';
 
@@ -156,15 +162,26 @@ const toggleMachine = createMachine({
 
 ---
 
-# State Chart
+# State Chart Demo
 
-[連結](https://stately.ai/registry/editor/embed/05bdef56-870a-4edf-9800-5c2351ce7232?machineId=295d6e4b-384c-43a7-9b5a-55edc15d5b91&mode=Simulate)
+以達哥 Codebase 中，會出現的各種主要狀態做範例
+
+- home
+- directChat
+- assistantChat
+- tmaChat
+  - enter assistantChat first
+
+要 Simulate 請到 [Stately Editor](https://stately.ai/registry/editor/embed/e6c9c269-a65c-475b-8afd-09010866d350?mode=Design&machineId=a6ae1d42-68f3-4e84-b4c3-382f249904bb) 看
+
+<img 
+  class="absolute w-125 left-100 top-32"
+  src='./images/chart.png'
+/>
 
 ---
 
 # Extensions
-
-[連結](https://marketplace.visualstudio.com/items?itemName=statelyai.stately-vscode)
 
 ---
 
