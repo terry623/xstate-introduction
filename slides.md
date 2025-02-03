@@ -23,17 +23,17 @@ Terry Lin @MediaTek
 
 XState 是一個用於狀態管理的 JS 函式庫
 
-利用有限狀態機（FSM）和狀態圖（Statecharts）
+利用<span v-mark.orange="1">有限狀態機</span>（FSM）和<span v-mark.orange="1">狀態圖</span>（Statecharts）
 
 來描述與管理應用中的各種狀態與轉換，使邏輯更加明確且易於維護
 
-- 可視化工具
+- <span v-mark.orange="1">可視化</span>工具
 - 框架無關性
 - 強大的擴充性
 
 能讓開發者更輕鬆地追蹤狀態轉變的過程
 
-還可降低程式<span v-mark.orange="1">因條件混亂或多層 if-else 判斷</span>導致的錯誤
+還可降低程式<span v-mark.orange="2">因條件混亂或多層 if-else 判斷</span>導致的錯誤
 
 <img 
   class="absolute w-80 left-145 top-70"
@@ -47,9 +47,9 @@ XState 是一個用於狀態管理的 JS 函式庫
 有限狀態機（FSM），是一種用來描述系統行為的數學模型
 
 - 有限狀態：系統的所有可能狀態是有限且固定的，每次系統<span v-mark.orange="1">僅能處於其中一個狀態</span>
-- 狀態轉換：根據外部輸入或事件，系統會從當前狀態轉換到另一個狀態
+- 狀態轉換：根據<span v-mark.orange="1">外部輸入或事件</span>，系統會從當前狀態轉換到另一個狀態
 - 輸入條件：轉換的觸發條件通常由外部輸入決定，不同的輸入對應不同的轉換路徑
-- 動作或輸出：在狀態轉換過程中，系統可能會執行特定動作或產生相應輸出
+- 動作或輸出：在狀態轉換過程中，系統可能會<span v-mark.orange="1">執行特定動作</span>或產生相應輸出
 
 <img 
   class="m-auto w-42%"
@@ -195,3 +195,10 @@ const toggleMachine = createMachine({
    - [Jotai](https://jotai.org/)：
      - 適用於狀態邏輯<span v-mark.orange="1">較簡單或需要細粒度、局部管理</span>的場景
      - 其極簡的 API 設計只會更新實際依賴該 atom 的元件，從而提升效能
+
+---
+layout: center
+class: text-center
+---
+[Slide Repo Link](https://github.com/terry623/xstate-introduction)
+<PoweredBySlidev mt-10 />
