@@ -173,7 +173,7 @@ const toggleMachine = createMachine({
 3. assistantChat
 4. tmaChat
 
-要 Simulate 請到 [Stately Editor](https://stately.ai/registry/editor/embed/e6c9c269-a65c-475b-8afd-09010866d350?mode=Design&machineId=a6ae1d42-68f3-4e84-b4c3-382f249904bb) 
+要 Simulate 請到 [Stately Editor](https://stately.ai/registry/editor/b3e81f94-5eaf-4235-96b9-b436adafecc8?mode=Design&machineId=a6ae1d42-68f3-4e84-b4c3-382f249904bb) 
 
 或者用 [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=statelyai.stately-vscode)
 
