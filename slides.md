@@ -33,7 +33,7 @@ XState 是一個用於狀態管理的 JS 函式庫
 
 能讓開發者更輕鬆地追蹤狀態轉變的過程
 
-還可降低程式<span v-mark.orange="2">因條件混亂或多層 if-else </span>導致的錯誤
+還可降低程式<span v-mark.orange="2">因條件混亂或多層 if-else</span> 導致的錯誤
 
 實現<span v-mark.orange="2">關注點分離</span>，提高<span v-mark.orange="2">內聚性</span>
 
