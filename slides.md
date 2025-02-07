@@ -166,6 +166,13 @@ const toggleMachine = createMachine({
 
 ---
 
+# Quick Start
+
+1. [Parent states](https://stately.ai/registry/editor/1c962847-2829-45e2-b6fc-5f42fa3f8b6b?colorMode=dark&machineId=9ba5377c-aab3-4465-8909-4eea499622fa)
+2. [Parallel states](https://stately.ai/registry/editor/1c962847-2829-45e2-b6fc-5f42fa3f8b6b?colorMode=dark&machineId=733de338-26cb-40a5-a0b5-b76bfc0405c3)
+
+---
+
 # State Chart Demo
 
 以 Codebase 中出現的主要狀態做範例：
